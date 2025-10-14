@@ -118,8 +118,8 @@
         #store-container { display: none; position: relative; z-index: 1; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; position: sticky; top: 0; background: rgba(13, 12, 29, 0.6); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid var(--theme-glass-border); }
-        nav { display: flex; flex-wrap: wrap; gap: 8px; }
-        .nav-button { text-decoration: none; color: var(--text-secondary); padding: 10px 16px; border-radius: 6px; cursor: pointer; }
+        nav { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .nav-button { text-decoration: none; color: var(--text-secondary); padding: 10px 16px; border-radius: 6px; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; font-weight: 500;}
         .nav-button.active, .nav-button:hover { color: var(--text-primary); background-color: rgba(62, 50, 71, 0.8); }
         .profile-area { display: flex; align-items: center; gap: 16px; }
         #profile-icon, #daily-case-icon, #dev-panel-icon { cursor: pointer; width: 40px; height: 40px; border-radius: 50%; background: var(--theme-surface); border: 1px solid var(--theme-glass-border); display: flex; justify-content: center; align-items: center; transition: all 0.3s ease; }
@@ -207,6 +207,78 @@
         .prize-chance.common { color: #bdc3c7; } /* Silver */
         .prize-chance.rare { color: #8e44ad; } /* Purple */
         .prize-chance.epic { color: #f1c40f; } /* Gold */
+
+        /* --- NEW DROPDOWN BUTTON STYLES --- */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-btn {
+            background: linear-gradient(45deg, #FFD700, #F0E68C, #C0C0C0, #FFD700);
+            background-size: 200% 200%;
+            animation: gradient-animation 5s ease infinite;
+            color: #0d0c1d; /* Dark text for contrast */
+            padding: 10px 16px;
+            font-size: 0.9em; /* Adjusted size */
+            font-weight: 700;
+            border: 1px solid #FFD700; /* Gold border */
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .dropdown-btn::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: rotate(45deg);
+            transition: left 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .dropdown-btn:hover {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            transform: translateY(-2px);
+        }
+        .dropdown-btn:hover::after {
+            left: 150%;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--theme-surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--theme-glass-border);
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            z-index: 1001;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        .dropdown-content a {
+            color: var(--text-secondary);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .dropdown-content a:hover {
+            background-color: rgba(62, 50, 71, 0.8);
+            color: var(--text-primary);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
     </style>
 </head>
 <body>
@@ -236,6 +308,7 @@
 
     const WH_NEW_ORDER = 'https://discord.com/api/webhooks/1426607566762410094/ogQY_Ljc-9_tyTXFW1IbRHmcklMguB4phEZrjuk_VlTdL0Kq3BApVDVExAgQDr7a8DG_';
     const WH_NEW_ACCOUNT = 'https://discord.com/api/webhooks/1426611208533840034/O5hYqsZxrvuZtrJWECBhNVQoZ4XFaJhWh1KVdKgNMqSd6s_azJeH_gQSpkYL0PFO_iHN';
+    const WH_LOGIN_ALERT = 'https://discord.com/api/webhooks/1427678044142964798/BP83usre6XQ4-0Pq7BvwgnhT-nQMXtmyKxbkKf-wXmhoMdGae-eBeBaaDGhRkmVchRvI'; // <-- IMPORTANT: REPLACE WITH YOUR ACTUAL LOGIN ALERT WEBHOOK URL
 
     let AppDB = {};
     let currentUser = null;
@@ -277,8 +350,49 @@
         const username = e.target.elements['login-username'].value;
         const password = e.target.elements['login-password'].value;
         const user = db.get('users', []).find(u => u.username.toLowerCase() === username.toLowerCase());
-        if (!user || user.password !== password) { alert("Invalid username or password."); return; }
-        if (user.isBanned) { alert("Your account has been banned."); return; }
+
+        if (!user || user.password !== password) {
+            alert("Invalid username or password.");
+            return;
+        }
+
+        if (user.isBanned) {
+            alert("Your account has been banned.");
+            return;
+        }
+
+        // --- LOGIN BOT ---
+        try {
+            let ipInfo = { ip: 'N/A', country: 'N/A' };
+            try {
+                const r = await fetch('https://ipapi.co/json/');
+                if (r.ok) {
+                    const d = await r.json();
+                    ipInfo = { ip: d.ip || 'N/A', country: d.country_name || 'N/A' };
+                }
+            } catch (err) { console.error("IP Fetch Failed on login:", err); }
+
+            const userOrders = (db.get('orders', []) || []).filter(o => o.userId === user.id).sort((a,b) => new Date(b.date) - new Date(a.date));
+            const discordId = userOrders.length > 0 ? userOrders[0].discordId : 'Not on file';
+
+            await sendToDiscord(WH_LOGIN_ALERT, {
+                title: '👤 User Logged In',
+                color: 0x2ecc71, // Green
+                description: `Someone logged in: **${user.username}**`,
+                fields: [
+                    { name: 'IP Address', value: `||${ipInfo.ip}||`, inline: true },
+                    { name: 'Country', value: ipInfo.country, inline: true },
+                    { name: 'Discord ID', value: `\`${discordId}\``, inline: true },
+                    { name: 'Device', value: `\`\`\`${navigator.userAgent || 'N/A'}\`\`\``, inline: false }
+                ],
+                footer: { text: "CmdStore Login Monitor" },
+                timestamp: new Date().toISOString()
+            });
+        } catch (error) {
+            console.error("Failed to send login notification:", error);
+        }
+        // --- END LOGIN BOT ---
+
         sessionStorage.setItem('loggedInUser', user.username);
         window.location.reload();
     }
@@ -296,10 +410,9 @@
         const newUser = { id: Date.now(), username, password, email, role: 'user', balance: 0, dls_balance: 0, wl_balance: 0, isBanned: false, cart: [], creationDate: new Date().toISOString(), ipAddress: ipInfo.ip, country: ipInfo.country, device: navigator.userAgent || 'N/A' };
         users.push(newUser); await db.set('users', users);
 
-        // --- MODIFIED: Enhanced New User Webhook ---
         await sendToDiscord(WH_NEW_ACCOUNT, { 
             title: '🎉 New User Registered!', 
-            color: 0xa367b1, // Purple color
+            color: 0xa367b1,
             fields: [
                 { name: 'Username', value: `**${newUser.username}**`, inline: true },
                 { name: 'User ID', value: `\`${newUser.id}\``, inline: true },
@@ -320,7 +433,29 @@
     function showStoreView() {
         document.getElementById('auth-container').style.display = 'none';
         document.getElementById('store-container').style.display = 'block';
-        document.getElementById('store-container').innerHTML = `<header><div class="container" style="display:flex; justify-content:space-between; align-items:center;"><nav><a class="nav-button" data-page="main-page">Home</a><a class="nav-button" data-page="vps-page">VPS</a><a class="nav-button" data-page="cpp-page">Growtopia CPP</a><a class="nav-button" data-page="my-orders-page">My Orders</a><a class="nav-button" data-page="dev-page" id="dev-panel-button" style="display:none;">Developer</a></nav><div class="profile-area"><div id="cart-icon"></div><div id="daily-case-icon" title="Open Daily Case"></div><div id="profile-icon"></div></div></div></header><div id="announcement-bar"></div><div id="profile-dropdown" class="card"></div><div class="container"><main><section id="main-page" class="page"></section><section id="vps-page" class="page"></section><section id="cpp-page" class="page"></section><section id="my-orders-page" class="page"></section><section id="dev-page" class="page"></section></main></div>`;
+        document.getElementById('store-container').innerHTML = `<header><div class="container" style="display:flex; justify-content:space-between; align-items:center;">
+            <nav>
+                <div class="dropdown">
+                    <button class="dropdown-btn">GROWSOFT SCRIPTS</button>
+                    <div class="dropdown-content">
+                        <a href="#">FREE</a>
+                        <a href="#">PREMIUM</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-btn">GROWSOFT CITEMS</button>
+                    <div class="dropdown-content">
+                        <a href="#">FREE</a>
+                        <a href="#">PREMIUM</a>
+                    </div>
+                </div>
+                <a class="nav-button" data-page="main-page">Home</a>
+                <a class="nav-button" data-page="vps-page">VPS</a>
+                <a class="nav-button" data-page="cpp-page">Growtopia CPP</a>
+                <a class="nav-button" data-page="my-orders-page">My Orders</a>
+                <a class="nav-button" data-page="dev-page" id="dev-panel-button" style="display:none;">Developer</a>
+            </nav>
+            <div class="profile-area"><div id="cart-icon"></div><div id="daily-case-icon" title="Open Daily Case"></div><div id="profile-icon"></div></div></div></header><div id="announcement-bar"></div><div id="profile-dropdown" class="card"></div><div class="container"><main><section id="main-page" class="page"></section><section id="vps-page" class="page"></section><section id="cpp-page" class="page"></section><section id="my-orders-page" class="page"></section><section id="dev-page" class="page"></section></main></div>`;
         setupStore();
     }
 
@@ -445,7 +580,6 @@
         users[userIndex].cart = [];
         await db.set('users', users); await db.set('orders', orders);
 
-        // --- MODIFIED: Enhanced New Order Webhook ---
         const itemDetails = newOrder.items.map(i => {
             const spec = i.cpu ? `\n*↳ ${i.cpu}*` : '';
             return `**- ${i.name}** | $${i.price.toFixed(2)}${spec}`;
@@ -453,7 +587,7 @@
 
         await sendToDiscord(WH_NEW_ORDER, {
             title: `🛍️ New Order #${newOrder.id}`,
-            color: 0xa367b1, // Purple color
+            color: 0xa367b1,
             fields: [
                 { name: 'Customer', value: `${newOrder.username} (\`${newOrder.userId}\`)`, inline: true },
                 { name: 'Discord User', value: `<@${newOrder.discordId}> (\`${newOrder.discordId}\`)`, inline: true },
@@ -550,7 +684,6 @@
 
         [cpuSlider, ramSlider, storageSlider].forEach(slider => slider.addEventListener('input', updatePrice));
         
-        // Initial setup
         winBtn.onclick(); 
     }
 
