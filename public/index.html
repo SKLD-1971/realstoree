@@ -118,8 +118,8 @@
         #store-container { display: none; position: relative; z-index: 1; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; position: sticky; top: 0; background: rgba(13, 12, 29, 0.6); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid var(--theme-glass-border); }
-        nav { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-        .nav-button { text-decoration: none; color: var(--text-secondary); padding: 10px 16px; border-radius: 6px; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; font-weight: 500;}
+        nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+        .nav-button { text-decoration: none; color: var(--text-secondary); padding: 10px 16px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-weight: 500;}
         .nav-button.active, .nav-button:hover { color: var(--text-primary); background-color: rgba(62, 50, 71, 0.8); }
         .profile-area { display: flex; align-items: center; gap: 16px; }
         #profile-icon, #daily-case-icon, #dev-panel-icon { cursor: pointer; width: 40px; height: 40px; border-radius: 50%; background: var(--theme-surface); border: 1px solid var(--theme-glass-border); display: flex; justify-content: center; align-items: center; transition: all 0.3s ease; }
@@ -141,8 +141,6 @@
         .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--theme-glass-border); }
         .cart-total { text-align: right; margin-top: 20px; font-size: 1.2em; font-weight: bold; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .modal { display: none; position: fixed; z-index: 5000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(13, 12, 29, 0.7); backdrop-filter: blur(8px); justify-content: center; align-items: center; overflow-y: auto; padding: 20px 0; }
-        .modal-content { max-width: 500px; width: 90%; padding: 30px; text-align: center; margin: auto; }
         .case-spinner-wrapper { overflow: hidden; position: relative; width: 100%; height: 100px; background: var(--theme-dark-bg); border-radius: 8px; border: 1px solid var(--theme-glass-border); margin: 20px 0; }
         .case-spinner-wrapper::before { content: ''; position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 4px; height: 100%; background: var(--theme-primary); z-index: 2; box-shadow: 0 0 10px var(--glow-color); }
         .case-reel { display: flex; height: 100%; position: absolute; left: 0; }
@@ -151,53 +149,22 @@
         .reel-item.rare { color: #8e44ad; } .reel-item.epic { color: #f39c12; }
         #daily-case-timer { font-size: 1.8em; font-weight: 700; color: var(--theme-primary); margin: 20px 0; }
         .prize-won-display { font-size: 2em; font-weight: bold; margin: 20px 0; color: var(--success); }
-        
-        /* --- VPS PAGE STYLES --- */
         .vps-config-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; align-items: flex-start; margin-bottom: 30px; }
         .config-image-container { width: 100%; border-radius: 8px; overflow: hidden; }
         .config-image-container img { width: 100%; height: auto; display: block; }
-        
         .vps-info-section { text-align: left; max-width: 900px; margin: 60px auto 0 auto; }
         .vps-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         .vps-info-grid .card { border-top: 3px solid transparent; transition: border-top-color 0.4s ease; }
         .vps-info-section.windows-theme .card { border-top-color: var(--windows-color); }
         .vps-info-section.linux-theme .card { border-top-color: var(--linux-color); }
-
         .vps-info-grid h3 { margin-top: 0; border-bottom: 1px solid var(--theme-glass-border); padding-bottom: 10px; }
         .vps-info-grid ul { padding-left: 20px; margin: 0; color: var(--text-secondary); }
         .vps-info-grid li { margin-bottom: 8px; }
-        
-        @media (max-width: 800px) {
-            .vps-config-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 768px) { 
-            .vps-info-grid { grid-template-columns: 1fr; } 
-        }
-
-        /* --- FLOATING DISCORD ICON --- */
-        #discord-float-icon {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #5865F2, #a367b1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1001;
-            box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4), 0 0 0 2px #bdc3c7; /* Silver ring */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        #discord-float-icon:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(155, 89, 182, 0.6), 0 0 20px var(--glow-color), 0 0 0 3px #fff;
-        }
+        @media (max-width: 800px) { .vps-config-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .vps-info-grid { grid-template-columns: 1fr; } }
+        #discord-float-icon { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: linear-gradient(45deg, #5865F2, #a367b1); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1001; box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4), 0 0 0 2px #bdc3c7; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        #discord-float-icon:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(155, 89, 182, 0.6), 0 0 20px var(--glow-color), 0 0 0 3px #fff; }
         #discord-float-icon svg { fill: white; width: 32px; height: 32px; }
-        
-        /* --- DAILY CASE PRIZE LIST --- */
         #daily-case-prizes { margin-top: 25px; text-align: left; }
         .prize-entry { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--theme-glass-border); font-size: 0.9em; }
         .prize-entry:last-child { border-bottom: none; }
@@ -208,107 +175,146 @@
         .prize-chance.rare { color: #8e44ad; } /* Purple */
         .prize-chance.epic { color: #f1c40f; } /* Gold */
 
-        /* --- NEW DROPDOWN BUTTON STYLES --- */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-btn {
+        .nav-button-special {
             background: linear-gradient(45deg, #FFD700, #F0E68C, #C0C0C0, #FFD700);
-            background-size: 200% 200%;
-            animation: gradient-animation 5s ease infinite;
-            color: #0d0c1d; /* Dark text for contrast */
-            padding: 10px 16px;
-            font-size: 0.9em; /* Adjusted size */
-            font-weight: 700;
-            border: 1px solid #FFD700; /* Gold border */
-            border-radius: 6px;
-            cursor: pointer;
+            background-size: 300% 300%;
+            animation: gradient-animation 4s ease infinite;
+            color: #0d0c1d !important;
+            font-weight: 700 !important;
+            border: 1px solid rgba(255, 215, 0, 0.5);
             position: relative;
             overflow: hidden;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
         }
         @keyframes gradient-animation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        .dropdown-btn::after {
-            content: "";
+        .nav-button-special::before {
+            content: '';
             position: absolute;
-            top: -50%;
-            left: -100%;
-            width: 20px;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: rotate(45deg);
-            transition: left 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            top: 0;
+            left: -150%;
+            width: 75%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            transition: left 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        .dropdown-btn:hover {
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-            transform: translateY(-2px);
-        }
-        .dropdown-btn:hover::after {
-            left: 150%;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: var(--theme-surface);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--theme-glass-border);
-            min-width: 160px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-            z-index: 1001;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-top: 5px;
-        }
-        .dropdown-content a {
-            color: var(--text-secondary);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-        .dropdown-content a:hover {
-            background-color: rgba(62, 50, 71, 0.8);
-            color: var(--text-primary);
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+        .nav-button-special:hover::before { left: 150%; }
+        .nav-button-special:hover { box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); transform: translateY(-2px); }
 
+        /* --- MODAL SYSTEM --- */
+        .modal { display: none; position: fixed; z-index: 5000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(13, 12, 29, 0.7); backdrop-filter: blur(8px); justify-content: center; align-items: center; animation: fadeInModal 0.3s; }
+        .modal-content { max-width: 90%; width: 700px; padding: 30px; text-align: center; margin: auto; animation: zoomInModal 0.3s; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-header h2 { margin: 0; font-size: 1.8em; }
+        .close-btn { font-size: 2em; font-weight: bold; color: var(--text-secondary); cursor: pointer; transition: color 0.2s; }
+        .close-btn:hover { color: var(--text-primary); }
+        @keyframes fadeInModal { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomInModal { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* --- GROWSOFT MENU MODAL STYLES --- */
+        .growsoft-menu-options { display: flex; justify-content: center; align-items: center; gap: 30px; min-height: 200px; }
+        .growsoft-menu-options .btn { width: 150px; height: 60px; font-size: 1.2em; }
+        #growsoft-content-area { margin-top: 20px; }
+        .product-card { text-align: left; padding: 20px; margin-bottom: 15px; }
+        .product-card-header { display: flex; justify-content: space-between; align-items: center; }
+        .product-price { font-size: 1.4em; font-weight: 700; }
+        
+        /* --- IMAGE PREVIEW MODAL --- */
+        #image-preview-modal .modal-content { max-width: 1000px; background: none; box-shadow: none; border: none; }
+        #image-preview-container { position: relative; }
+        #image-preview-container img { max-width: 100%; max-height: 80vh; border-radius: 8px; }
+        .preview-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; font-size: 2em; cursor: pointer; padding: 10px 15px; border-radius: 50%; transition: background 0.2s; }
+        .preview-nav:hover { background: rgba(0,0,0,0.8); }
+        .preview-nav.prev { left: 10px; }
+        .preview-nav.next { right: 10px; }
     </style>
 </head>
 <body>
     <div class="background-animation" id="background-animation"></div>
     <div id="auth-container"></div>
     <div id="store-container"></div>
+    
+    <!-- Original Main Modal -->
     <div id="main-modal" class="modal"><div class="modal-content card" id="main-modal-content"></div></div>
     
-    <a href="https://discord.gg/RU7CzvkyBR" target="_blank" id="discord-float-icon" title="Join our Discord">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.3,3.5C18.8,2.7,17.2,2.2,15.5,2C15.3,2.4,15.1,3.2,15,3.6C13.2,3.3,11.3,3.3,9.5,3.6C9.4,3.2,9.2,2.4,9,2C7.3,2.2,5.7,2.7,4.2,3.5C1.6,7.8,1.4,12.4,3.7,16.2C5.5,17.7,7.6,18.5,9.8,18.8C10.2,18.2,10.6,17.6,10.9,16.9C10.2,16.7,9.5,16.5,8.9,16.1C8.9,16.1,8.8,16.1,8.8,16C8.2,15.5,7.7,14.9,7.3,14.1C7.2,14,7.1,13.8,7.1,13.7C7.1,13.7,7.1,13.6,7.2,13.5C7.2,13.5,7.2,13.5,7.2,13.5C7.3,13.3,7.4,13.2,7.5,13.1C7.6,13,7.8,12.9,8,12.8C8.1,12.7,8.2,12.7,8.3,12.6C8.5,12.5,8.8,12.4,9.1,12.3C9.2,12.3,9.4,12.2,9.5,12.2C10.6,11.9,11.8,11.8,13,11.9C13.1,11.9,13.3,11.9,13.4,11.9C14.5,12.1,15.6,12.4,16.5,13C16.6,13.1,16.7,13.1,16.8,13.2C16.8,13.2,16.8,13.2,16.8,13.2C17.4,13.6,17.9,14.2,18.2,14.9C18.2,14.9,18.2,15,18.2,15C17.6,15.5,17.1,15.9,16.5,16.2C15.9,16.5,15.3,16.7,14.6,16.9C14.9,17.6,15.3,18.2,15.7,18.8C17.9,18.5,20,17.7,21.8,16.2C24.1,12.3,23.9,7.7,20.3,3.5M12.2,14.8C11.2,14.8,10.4,14,10.4,13C10.4,12,11.2,11.2,12.2,11.2C13.2,11.2,14,12,14,13C14,14,13.2,14.8,12.2,14.8M17.2,14.8C16.2,14.8,15.4,14,15.4,13C15.4,12,16.2,11.2,17.2,11.2C18.2,11.2,19,12,19,13C19,14,18.2,14.8,17.2,14.8Z"/></svg>
-    </a>
-    
+    <!-- Daily Case Modal -->
     <div id="daily-case-modal" class="modal">
         <div class="modal-content card">
             <h3>Your Daily Case</h3>
             <div id="daily-case-content"></div>
         </div>
     </div>
+    
+    <!-- New Growsoft Menu Modal -->
+    <div id="growsoft-modal" class="modal">
+        <div class="modal-content card">
+            <div class="modal-header">
+                <h2 id="growsoft-modal-title"></h2>
+                <span class="close-btn" onclick="closeModal('growsoft-modal')">&times;</span>
+            </div>
+            <div id="growsoft-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- New Image Preview Modal -->
+    <div id="image-preview-modal" class="modal" onclick="closeModal('image-preview-modal')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+             <div id="image-preview-container">
+                <img>
+                <button class="preview-nav prev" onclick="changeImage(-1)">&#10094;</button>
+                <button class="preview-nav next" onclick="changeImage(1)">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://discord.gg/RU7CzvkyBR" target="_blank" id="discord-float-icon" title="Join our Discord">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.3,3.5C18.8,2.7,17.2,2.2,15.5,2C15.3,2.4,15.1,3.2,15,3.6C13.2,3.3,11.3,3.3,9.5,3.6C9.4,3.2,9.2,2.4,9,2C7.3,2.2,5.7,2.7,4.2,3.5C1.6,7.8,1.4,12.4,3.7,16.2C5.5,17.7,7.6,18.5,9.8,18.8C10.2,18.2,10.6,17.6,10.9,16.9C10.2,16.7,9.5,16.5,8.9,16.1C8.9,16.1,8.8,16.1,8.8,16C8.2,15.5,7.7,14.9,7.3,14.1C7.2,14,7.1,13.8,7.1,13.7C7.1,13.7,7.1,13.6,7.2,13.5C7.2,13.5,7.2,13.5,7.2,13.5C7.3,13.3,7.4,13.2,7.5,13.1C7.6,13,7.8,12.9,8,12.8C8.1,12.7,8.2,12.7,8.3,12.6C8.5,12.5,8.8,12.4,9.1,12.3C9.2,12.3,9.4,12.2,9.5,12.2C10.6,11.9,11.8,11.8,13,11.9C13.1,11.9,13.3,11.9,13.4,11.9C14.5,12.1,15.6,12.4,16.5,13C16.6,13.1,16.7,13.1,16.8,13.2C16.8,13.2,16.8,13.2,16.8,13.2C17.4,13.6,17.9,14.2,18.2,14.9C18.2,14.9,18.2,15,18.2,15C17.6,15.5,17.1,15.9,16.5,16.2C15.9,16.5,15.3,16.7,14.6,16.9C14.9,17.6,15.3,18.2,15.7,18.8C17.9,18.5,20,17.7,21.8,16.2C24.1,12.3,23.9,7.7,20.3,3.5M12.2,14.8C11.2,14.8,10.4,14,10.4,13C10.4,12,11.2,11.2,12.2,11.2C13.2,11.2,14,12,14,13C14,14,13.2,14.8,12.2,14.8M17.2,14.8C16.2,14.8,15.4,14,15.4,13C15.4,12,16.2,11.2,17.2,11.2C18.2,11.2,19,12,19,13C19,14,18.2,14.8,17.2,14.8Z"/></svg>
+    </a>
 
 <script>
     const DLS_RATE = 0.07;
-    const LOGO_URL = `https://media.discordapp.net/attachments/1210718340449042473/1426944146895274064/i222mage.png?ex=68efb3cb&is=68ee624b&hm=5fea1bda7e9a499950bad25b253254878fd6890445c184be1bdf110b57186480&=&format=webp&quality=lossless&width=658&height=658`;
-    const DLS_ICON_URL = `https://media.discordapp.net/attachments/1210718340449042473/1424992121424838686/image-Photoroom.png?ex=68ef3154&is=68eddfd4&hm=eaa52f7e6b180f64cf7d1cc0a54c0ed81fd4f4983847a432e360970db5516b40&=&format=webp&quality=lossless`;
+    const LOGO_URL = `https://media.discordapp.net/attachments/1210718340449042473/1426944146895274064/i222mage.png?ex=68edb98b&is=68ec680b&hm=db1b5f75cfe5edd6ef88f06627b759117dfb1fb08abc9233e528c268a29a55b4&=&format=webp&quality=lossless&width=658&height=658`;
+    const DLS_ICON_URL = `https://media.discordapp.net/attachments/1210718340449042473/1424992121424838686/image-Photoroom.png?ex=68eddfd4&is=68ec8e54&hm=b3701d57f7dac1894d290b5f7eae8ca43f03ad5177ed21c8de871e8d35912039&=&format=webp&quality=lossless`;
     const WL_ICON_URL = `https://media.discordapp.net/attachments/1234239780800299109/1427368153876402256/image-Photoroom_3.png?ex=68ee9baf&is=68ed4a2f&hm=3027294d3b7987810754fe49ee0a923474574f5b2d5cfb373a40f3325c92a970&=&format=webp&quality=lossless`;
     const WINDOWS_WALLPAPER_URL = 'https://www.chromethemer.com/wallpapers/chromebook-wallpapers/images/960/windows-chromebook-wallpaper.jpg';
     const LINUX_WALLPAPER_URL = 'https://www.unixmen.com/wp-content/uploads/2022/08/linux-g13ed29529_1280-1068x799.jpg';
 
-    const WH_NEW_ORDER = 'https://discord.com/api/webhooks/1426607566762410094/ogQY_Ljc-9_tyTXFW1IbRHmcklMguB4phEZrjuk_VlTdL0Kq3BApVDVExAgQDr7a8DG_';
+    // =================================================================================================
+    // ===================================  ACTION REQUIRED!  ==========================================
+    //
+    //      BOTS WILL NOT WORK UNTIL YOU REPLACE THE URLs BELOW WITH YOUR OWN WEBHOOK URLs.
+    //
+    // =================================================================================================
+    const WH_VISITOR_ALERT = '!!! REPLACE THIS WITH YOUR NEW VISITOR ALERT WEBHOOK URL !!!';
+    const WH_LOGIN_ALERT = '!!! REPLACE THIS WITH YOUR LOGIN ALERT WEBHOOK URL !!!';
     const WH_NEW_ACCOUNT = 'https://discord.com/api/webhooks/1426611208533840034/O5hYqsZxrvuZtrJWECBhNVQoZ4XFaJhWh1KVdKgNMqSd6s_azJeH_gQSpkYL0PFO_iHN';
-    const WH_LOGIN_ALERT = 'https://discord.com/api/webhooks/1427678044142964798/BP83usre6XQ4-0Pq7BvwgnhT-nQMXtmyKxbkKf-wXmhoMdGae-eBeBaaDGhRkmVchRvI'; // <-- IMPORTANT: REPLACE WITH YOUR ACTUAL LOGIN ALERT WEBHOOK URL
+    const WH_NEW_ORDER = 'https://discord.com/api/webhooks/1426607566762410094/ogQY_Ljc-9_tyTXFW1IbRHmcklMguB4phEZrjuk_VlTdL0Kq3BApVDVExAgQDr7a8DG_';
+
+    // --- NEW GROWSOFT PRODUCT DATABASE ---
+    const GROWSOFT_PRODUCTS = {
+        Scripts: {
+            Premium: [
+                {
+                    id: 'gs_script_shop_01',
+                    name: '/SHOP SCRIPT',
+                    price: 4.00,
+                    description: '4$ FOR LOCKED SORCE . OPEN SORCE 20$ .Advanced shop script with multiple features for automation. Includes inventory management and auto-restock.',
+                    images: [
+                        'https://media.discordapp.net/attachments/1413194882834759902/1416422627408609472/Growtopia_Screenshot_2025.09.13_-_17.56.09.49.png?ex=68efa85e&is=68ee56de&hm=bdaf9b39385e46b7b4bfac873aab0d109eaf9e793c67c7ee60c3253c42d4cd48&=&format=webp&quality=lossless&width=985&height=554',
+                        'https://media.discordapp.net/attachments/1413194882834759902/1416422628075376670/Growtopia_Screenshot_2025.09.13_-_17.56.32.21.png?ex=68efa85e&is=68ee56de&hm=45b55edf9f9095d5d6025d5b0465590a4948a33ce9968bf777be0821442d94fa&=&format=webp&quality=lossless&width=985&height=554'
+                    ]
+                }
+            ],
+            Free: []
+        },
+        Citems: {
+            Premium: [],
+            Free: []
+        }
+    };
 
     let AppDB = {};
     let currentUser = null;
@@ -328,7 +334,7 @@
     };
     
     async function sendToDiscord(webhookURL, embed) {
-        if (!webhookURL || !webhookURL.startsWith('https://discord.com/api/webhooks/')) return;
+        if (!webhookURL || webhookURL.includes('!!! REPLACE THIS')) return;
         try { await fetch(webhookURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ embeds: [embed] }) });
         } catch (e) { console.error("Discord Send Failed:", e); }
     }
@@ -337,10 +343,10 @@
         document.getElementById('auth-container').style.display = 'flex';
         document.getElementById('store-container').style.display = 'none';
         if (view === 'login') {
-            document.getElementById('auth-container').innerHTML = `<div class="auth-wrapper card"><h2>Login</h2><form id="login-form"><div class="input-group"><input type="text" id="login-username" placeholder="Username" required></div><div class="input-group"><input type="password" id="login-password" placeholder="Password" required></div><button type="submit" class="btn btn-primary">Login</button></form><p class="auth-toggle" onclick="showAuthView('register')">Don't have an account? Sign Up</p></div>`;
+            document.getElementById('auth-container').innerHTML = `<div class="auth-wrapper card"><h2>Login</h2><form id="login-form"><div class="input-group"><input type="text" id="login-username" placeholder="Username" required></div><div class="input-group"><input type="password" id="login-password" placeholder="Password" required></div><button type="submit" class="btn btn-primary">Login</button></form><p style="cursor:pointer;" class="auth-toggle" onclick="showAuthView('register')">Don't have an account? Sign Up</p></div>`;
             document.getElementById('login-form').addEventListener('submit', handleLogin);
         } else {
-            document.getElementById('auth-container').innerHTML = `<div class="auth-wrapper card"><h2>Sign Up</h2><form id="register-form"><div class="input-group"><input type="text" id="register-username" placeholder="Username" required></div><div class="input-group"><input type="email" id="register-email" placeholder="Email" required></div><div class="input-group"><input type="password" id="register-password" placeholder="Password" required></div><button type="submit" class="btn btn-primary">Create Account</button></form><p class="auth-toggle" onclick="showAuthView('login')">Already have an account? Login</p></div>`;
+            document.getElementById('auth-container').innerHTML = `<div class="auth-wrapper card"><h2>Sign Up</h2><form id="register-form"><div class="input-group"><input type="text" id="register-username" placeholder="Username" required></div><div class="input-group"><input type="email" id="register-email" placeholder="Email" required></div><div class="input-group"><input type="password" id="register-password" placeholder="Password" required></div><button type="submit" class="btn btn-primary">Create Account</button></form><p style="cursor:pointer;" class="auth-toggle" onclick="showAuthView('login')">Already have an account? Login</p></div>`;
             document.getElementById('register-form').addEventListener('submit', handleRegister);
         }
     }
@@ -350,49 +356,11 @@
         const username = e.target.elements['login-username'].value;
         const password = e.target.elements['login-password'].value;
         const user = db.get('users', []).find(u => u.username.toLowerCase() === username.toLowerCase());
-
-        if (!user || user.password !== password) {
-            alert("Invalid username or password.");
-            return;
-        }
-
-        if (user.isBanned) {
-            alert("Your account has been banned.");
-            return;
-        }
-
-        // --- LOGIN BOT ---
-        try {
-            let ipInfo = { ip: 'N/A', country: 'N/A' };
-            try {
-                const r = await fetch('https://ipapi.co/json/');
-                if (r.ok) {
-                    const d = await r.json();
-                    ipInfo = { ip: d.ip || 'N/A', country: d.country_name || 'N/A' };
-                }
-            } catch (err) { console.error("IP Fetch Failed on login:", err); }
-
-            const userOrders = (db.get('orders', []) || []).filter(o => o.userId === user.id).sort((a,b) => new Date(b.date) - new Date(a.date));
-            const discordId = userOrders.length > 0 ? userOrders[0].discordId : 'Not on file';
-
-            await sendToDiscord(WH_LOGIN_ALERT, {
-                title: '👤 User Logged In',
-                color: 0x2ecc71, // Green
-                description: `Someone logged in: **${user.username}**`,
-                fields: [
-                    { name: 'IP Address', value: `||${ipInfo.ip}||`, inline: true },
-                    { name: 'Country', value: ipInfo.country, inline: true },
-                    { name: 'Discord ID', value: `\`${discordId}\``, inline: true },
-                    { name: 'Device', value: `\`\`\`${navigator.userAgent || 'N/A'}\`\`\``, inline: false }
-                ],
-                footer: { text: "CmdStore Login Monitor" },
-                timestamp: new Date().toISOString()
-            });
-        } catch (error) {
-            console.error("Failed to send login notification:", error);
-        }
-        // --- END LOGIN BOT ---
-
+        if (!user || user.password !== password) { alert("Invalid username or password."); return; }
+        if (user.isBanned) { alert("Your account has been banned."); return; }
+        
+        sendEnhancedUserInfoToDiscord(WH_LOGIN_ALERT, '👤 User Logged In', `**${user.username}** has logged in.`, 0x2ecc71, user);
+        
         sessionStorage.setItem('loggedInUser', user.username);
         window.location.reload();
     }
@@ -409,23 +377,16 @@
         } catch (e) { console.error("IP Fetch Failed:", e); }
         const newUser = { id: Date.now(), username, password, email, role: 'user', balance: 0, dls_balance: 0, wl_balance: 0, isBanned: false, cart: [], creationDate: new Date().toISOString(), ipAddress: ipInfo.ip, country: ipInfo.country, device: navigator.userAgent || 'N/A' };
         users.push(newUser); await db.set('users', users);
-
         await sendToDiscord(WH_NEW_ACCOUNT, { 
-            title: '🎉 New User Registered!', 
-            color: 0xa367b1,
+            title: '🎉 New User Registered!', color: 0xa367b1,
             fields: [
-                { name: 'Username', value: `**${newUser.username}**`, inline: true },
-                { name: 'User ID', value: `\`${newUser.id}\``, inline: true },
-                { name: 'Email', value: `||${newUser.email}||`, inline: false },
-                { name: 'Country', value: newUser.country, inline: true },
-                { name: 'IP Address', value: `||${newUser.ipAddress}||`, inline: true },
-                { name: 'Initial Role', value: newUser.role, inline: true },
+                { name: 'Username', value: `**${newUser.username}**`, inline: true }, { name: 'User ID', value: `\`${newUser.id}\``, inline: true },
+                { name: 'Email', value: `||${newUser.email}||`, inline: false }, { name: 'Country', value: newUser.country, inline: true },
+                { name: 'IP Address', value: `||${newUser.ipAddress}||`, inline: true }, { name: 'Initial Role', value: newUser.role, inline: true },
                 { name: 'User Agent', value: `\`\`\`${newUser.device}\`\`\``, inline: false }
             ],
-            footer: { text: "CmdStore User System" },
-            timestamp: new Date().toISOString() 
+            footer: { text: "CmdStore User System" }, timestamp: new Date().toISOString() 
         });
-
         alert('Account created! You can now log in.');
         showAuthView('login');
     }
@@ -435,20 +396,8 @@
         document.getElementById('store-container').style.display = 'block';
         document.getElementById('store-container').innerHTML = `<header><div class="container" style="display:flex; justify-content:space-between; align-items:center;">
             <nav>
-                <div class="dropdown">
-                    <button class="dropdown-btn">GROWSOFT SCRIPTS</button>
-                    <div class="dropdown-content">
-                        <a href="#">FREE</a>
-                        <a href="#">PREMIUM</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropdown-btn">GROWSOFT CITEMS</button>
-                    <div class="dropdown-content">
-                        <a href="#">FREE</a>
-                        <a href="#">PREMIUM</a>
-                    </div>
-                </div>
+                <a class="nav-button nav-button-special" onclick="showGrowsoftMenu('Scripts')">GROWSOFT SCRIPTS</a>
+                <a class="nav-button nav-button-special" onclick="showGrowsoftMenu('Citems')">GROWSOFT CITEMS</a>
                 <a class="nav-button" data-page="main-page">Home</a>
                 <a class="nav-button" data-page="vps-page">VPS</a>
                 <a class="nav-button" data-page="cpp-page">Growtopia CPP</a>
@@ -481,26 +430,7 @@
 
     function renderAllPages() {
         document.getElementById('main-page').innerHTML = `<div style="text-align:center;"><img src="${LOGO_URL}" alt="Logo" style="width:150px; height:150px; margin-bottom:20px;"></div><h1 style="font-size: 3.5rem; text-align:center;">Secure, Fast & Reliable Cloud Solutions</h1><p class="section-subtitle">Discover our high-performance platform for servers and game files.</p><button class="btn btn-primary" style="height: 55px; font-size: 1.1em; display:block; margin:auto;" onclick="showPage('vps-page')">Get Started</button>`;
-        
-        document.getElementById('vps-page').innerHTML = `<h2>Configure Your Perfect VPS</h2><p class="section-subtitle">Use the sliders to build a plan that fits your needs and budget.</p><div class="card vps-configurator-card" style="padding: 30px;"><!-- Configurator will be rendered by JS --></div>
-        <div id="vps-info-cards" class="vps-info-section">
-            <div class="vps-info-grid">
-                <div class="card" style="padding: 20px;">
-                    <h3>What is a VPS?</h3>
-                    <p>A Virtual Private Server (VPS) is your own personal server on the internet. It's a powerful, private space that you control, perfect for hosting websites, game servers, bots, or running applications 24/7 without needing to keep your own computer on.</p>
-                </div>
-                <div class="card" style="padding: 20px;">
-                    <h3>What Makes Our VPS Special?</h3>
-                    <ul>
-                        <li><strong>Blazing-Fast NVMe SSDs:</strong> Experience incredibly fast file access and loading times compared to traditional SSDs.</li>
-                        <li><strong>Instant Setup:</strong> Your server is automatically deployed and ready to use just minutes after your order is approved.</li>
-                        <li><strong>DDoS Protection:</strong> We provide robust, always-on protection to keep your services online even during an attack.</li>
-                        <li><strong>Full Root/Admin Access:</strong> You have complete control to install any software and configure your server exactly how you want.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>`;
-
+        document.getElementById('vps-page').innerHTML = `<h2>Configure Your Perfect VPS</h2><p class="section-subtitle">Use the sliders to build a plan that fits your needs and budget.</p><div class="card vps-configurator-card" style="padding: 30px;"><!-- Configurator will be rendered by JS --></div><div id="vps-info-cards" class="vps-info-section"><div class="vps-info-grid"><div class="card" style="padding: 20px;"><h3>What is a VPS?</h3><p>A Virtual Private Server (VPS) is your own personal server on the internet. It's a powerful, private space that you control, perfect for hosting websites, game servers, bots, or running applications 24/7 without needing to keep your own computer on.</p></div><div class="card" style="padding: 20px;"><h3>What Makes Our VPS Special?</h3><ul><li><strong>Blazing-Fast NVMe SSDs:</strong> Experience incredibly fast file access and loading times compared to traditional SSDs.</li><li><strong>Instant Setup:</strong> Your server is automatically deployed and ready to use just minutes after your order is approved.</li><li><strong>DDoS Protection:</strong> We provide robust, always-on protection to keep your services online even during an attack.</li><li><strong>Full Root/Admin Access:</strong> You have complete control to install any software and configure your server exactly how you want.</li></ul></div></div></div>`;
         const cppProducts = [{ id: 21, name: 'Normal CPP', price: 3 }, { id: 22, name: 'Upgrade CPP', price: 10 }, { id: 23, name: 'Full Upgrade CPP + CUSTOMIZE EVERTHING SPECIAL .', price: 150 }];
         const renderCppPlan = (p) => `<div class="card" style="padding:25px; text-align:center;"><h3>${p.name}</h3><div class="price-display"><div class="price-usd">$${p.price.toFixed(2)}</div><div class="price-dls">or <img src="${DLS_ICON_URL}" class="dls-icon-small">${Math.ceil(p.price / DLS_RATE)}</div></div><button class="btn btn-primary" style="width:100%;" onclick='addToCart(${JSON.stringify(p)})'>Add to Cart</button></div>`;
         document.getElementById('cpp-page').innerHTML = `<h2>Growtopia C++ Files</h2><div class="product-grid">${cppProducts.map(renderCppPlan).join('')}</div>`;
@@ -510,11 +440,9 @@
 
     function setupEventListeners() {
         document.getElementById('profile-icon').onclick = () => { const d = document.getElementById('profile-dropdown'); d.style.display = d.style.display === 'block' ? 'none' : 'block'; };
-        document.getElementById('cart-icon').onclick = openCartModal;
-        document.getElementById('daily-case-icon').onclick = openDailyCaseModal;
-        document.getElementById('daily-case-modal').onclick = (e) => { if (e.target.id === 'daily-case-modal') e.target.style.display = 'none'; };
-        document.getElementById('main-modal').onclick = (e) => { if (e.target.id === 'main-modal') e.target.style.display = 'none'; };
-        document.querySelectorAll('.nav-button').forEach(btn => btn.addEventListener('click', (e) => showPage(e.currentTarget.dataset.page)));
+        document.getElementById('cart-icon').onclick = () => { openCartModal(); };
+        document.getElementById('daily-case-icon').onclick = () => { openDailyCaseModal(); };
+        document.querySelectorAll('.nav-button').forEach(btn => { if(btn.dataset.page) btn.addEventListener('click', (e) => showPage(e.currentTarget.dataset.page))});
     }
 
     function showPage(pageId) {
@@ -525,258 +453,193 @@
         if (pageId === 'my-orders-page') renderMyOrdersPage();
     }
     
-    window.addToCart = async (product) => { currentUser.cart.push({ ...product, cartItemId: Date.now() }); await db.set('users', db.get('users')); updateCartIcon(); };
-    window.removeFromCart = async (cartItemId) => { currentUser.cart = currentUser.cart.filter(item => item.cartItemId !== cartItemId); await db.set('users', db.get('users')); updateCartIcon(); openCartModal(); };
-    
-    window.validateDiscordId = () => {
-        const input = document.getElementById('order-discord-id');
-        const usdBtn = document.getElementById('pay-usd-btn');
-        const dlsBtn = document.getElementById('pay-dls-btn');
-        const isValid = /^\d{17,19}$/.test(input.value);
-        if (usdBtn && usdBtn.getAttribute('data-original-disabled') !== 'true') usdBtn.disabled = !isValid;
-        if (dlsBtn && dlsBtn.getAttribute('data-original-disabled') !== 'true') dlsBtn.disabled = !isValid;
-    }
+    window.addToCart = async (product) => {
+        currentUser.cart.push({ ...product, cartItemId: Date.now() });
+        await db.set('users', db.get('users'));
+        updateCartIcon();
+        alert(`'${product.name}' has been added to your cart!`);
+    };
 
-    window.openCartModal = () => { 
-        let c=`<h2>Your Cart</h2>`; 
-        if (!currentUser.cart || currentUser.cart.length === 0) { c+='<p>Your cart is empty.</p>'; } 
-        else { 
-            const tUSD=currentUser.cart.reduce((s,p)=>s+p.price,0); 
-            const tDLS=Math.ceil(tUSD/DLS_RATE); 
-            c+=currentUser.cart.map(p=>`<div class="cart-item"><span>${p.name} <small style="display:block; color:var(--text-secondary);">${p.cpu||''}</small></span><strong>$${p.price.toFixed(2)} <button class="action-button danger" onclick="removeFromCart(${p.cartItemId})">&times;</button></strong></div>`).join(''); 
-            c+=`<div class="cart-total">Total: $${tUSD.toFixed(2)} / ${tDLS} DLS</div>`; 
-            c+=`<hr style="border-color: var(--theme-glass-border); margin: 20px 0;"><div class="input-group"><label for="order-discord-id">Your Discord ID</label><input type="text" id="order-discord-id" placeholder="123456789012345678" oninput="validateDiscordId()" required><small style="margin-top: 5px;">Required for support & ticket creation.</small></div>`;
-            const canUSD=(currentUser.balance||0)>=tUSD; 
-            const canDLS=(currentUser.dls_balance||0)>=tDLS; 
-            c+=`<div style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;"><button id="pay-usd-btn" class="btn-order-special" onclick="showConfirmationModal('USD')" data-original-disabled="${!canUSD}" ${!canUSD?'disabled':''} disabled>Pay with USD</button><button id="pay-dls-btn" class="btn-order-special" onclick="showConfirmationModal('DLS')" data-original-disabled="${!canDLS}" ${!canDLS?'disabled':''} disabled>Pay with DLS</button></div>`; 
-        } 
+    window.removeFromCart = async (cartItemId) => { currentUser.cart = currentUser.cart.filter(item => item.cartItemId !== cartItemId); await db.set('users', db.get('users')); updateCartIcon(); openCartModal(); };
+    window.validateDiscordId = () => { const input = document.getElementById('order-discord-id'); const usdBtn = document.getElementById('pay-usd-btn'); const dlsBtn = document.getElementById('pay-dls-btn'); const isValid = /^\d{17,19}$/.test(input.value); if (usdBtn && usdBtn.getAttribute('data-original-disabled') !== 'true') usdBtn.disabled = !isValid; if (dlsBtn && dlsBtn.getAttribute('data-original-disabled') !== 'true') dlsBtn.disabled = !isValid; }
+
+    function openCartModal() { 
+        let c=`<h2>Your Cart</h2>`; if (!currentUser.cart || currentUser.cart.length === 0) { c+='<p>Your cart is empty.</p>'; } else { const tUSD=currentUser.cart.reduce((s,p)=>s+p.price,0); const tDLS=Math.ceil(tUSD/DLS_RATE); c+=currentUser.cart.map(p=>`<div class="cart-item"><span>${p.name} <small style="display:block; color:var(--text-secondary);">${p.cpu||''}</small></span><strong>$${p.price.toFixed(2)} <button class="action-button danger" onclick="removeFromCart(${p.cartItemId})">&times;</button></strong></div>`).join(''); c+=`<div class="cart-total">Total: $${tUSD.toFixed(2)} / ${tDLS} DLS</div>`; c+=`<hr style="border-color: var(--theme-glass-border); margin: 20px 0;"><div class="input-group"><label for="order-discord-id">Your Discord ID</label><input type="text" id="order-discord-id" placeholder="123456789012345678" oninput="validateDiscordId()" required><small style="margin-top: 5px;">Required for support & ticket creation.</small></div>`; const canUSD=(currentUser.balance||0)>=tUSD; const canDLS=(currentUser.dls_balance||0)>=tDLS; c+=`<div style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;"><button id="pay-usd-btn" class="btn-order-special" onclick="showConfirmationModal('USD')" data-original-disabled="${!canUSD}" ${!canUSD?'disabled':''} disabled>Pay with USD</button><button id="pay-dls-btn" class="btn-order-special" onclick="showConfirmationModal('DLS')" data-original-disabled="${!canDLS}" ${!canDLS?'disabled':''} disabled>Pay with DLS</button></div>`; } 
         document.getElementById('main-modal-content').innerHTML=c; 
         document.getElementById('main-modal').style.display='flex'; 
     };
-    
-    window.showConfirmationModal = (currency) => {
-        const discordId = document.getElementById('order-discord-id').value;
-        document.getElementById('main-modal-content').innerHTML = `<h2>Confirm Purchase</h2><p>Are you sure this information is correct?</p><p style="text-align:left; margin-left: 20px;"><strong>Discord ID:</strong> ${discordId}</p><p style="text-align:left; margin-left: 20px;"><strong>Payment:</strong> ${currency}</p><div style="display:flex; gap: 15px; justify-content:center; margin-top: 25px;"><button class="btn btn-primary" onclick="executePurchase('${currency}', '${discordId}')">Yes, Place Order</button><button class="btn btn-secondary" onclick="openCartModal()">No, Go Back</button></div>`;
-    }
+    function showConfirmationModal(currency) { const discordId = document.getElementById('order-discord-id').value; document.getElementById('main-modal-content').innerHTML = `<h2>Confirm Purchase</h2><p>Are you sure this information is correct?</p><p style="text-align:left; margin-left: 20px;"><strong>Discord ID:</strong> ${discordId}</p><p style="text-align:left; margin-left: 20px;"><strong>Payment:</strong> ${currency}</p><div style="display:flex; gap: 15px; justify-content:center; margin-top: 25px;"><button class="btn btn-primary" onclick="executePurchase('${currency}', '${discordId}')">Yes, Place Order</button><button class="btn btn-secondary" onclick="openCartModal()">No, Go Back</button></div>`; }
 
     async function executePurchase(currency, discordId) {
         if (!discordId || !/^\d{17,19}$/.test(discordId)) { alert('A valid Discord ID is required.'); return; }
-        
-        let users = db.get('users'), orders = db.get('orders', []);
-        const userIndex = users.findIndex(u => u.id === currentUser.id);
-        const cart = users[userIndex].cart;
-        const totalUSD = cart.reduce((s, i) => s + i.price, 0);
-        const totalDLS = Math.ceil(totalUSD / DLS_RATE);
-
-        if ((currency === 'USD' && (users[userIndex].balance || 0) < totalUSD) || (currency === 'DLS' && (users[userIndex].dls_balance || 0) < totalDLS)) {
-            alert('Insufficient funds.'); return;
-        }
-        
+        let users = db.get('users'), orders = db.get('orders', []); const userIndex = users.findIndex(u => u.id === currentUser.id); const cart = users[userIndex].cart; const totalUSD = cart.reduce((s, i) => s + i.price, 0); const totalDLS = Math.ceil(totalUSD / DLS_RATE);
+        if ((currency === 'USD' && (users[userIndex].balance || 0) < totalUSD) || (currency === 'DLS' && (users[userIndex].dls_balance || 0) < totalDLS)) { alert('Insufficient funds.'); return; }
         if(currency === 'USD') users[userIndex].balance -= totalUSD; else users[userIndex].dls_balance -= totalDLS;
-
         const orderId = '1-' + Math.floor(10000 + Math.random() * 90000);
         const newOrder = { id: orderId, userId: currentUser.id, username: currentUser.username, items: cart, totalPrice: totalUSD, paymentMethod: currency, discordId, date: new Date().toISOString(), status: 'Pending Approval' };
-        orders.push(newOrder);
-        users[userIndex].cart = [];
-        await db.set('users', users); await db.set('orders', orders);
-
-        const itemDetails = newOrder.items.map(i => {
-            const spec = i.cpu ? `\n*↳ ${i.cpu}*` : '';
-            return `**- ${i.name}** | $${i.price.toFixed(2)}${spec}`;
-        }).join('\n');
-
+        orders.push(newOrder); users[userIndex].cart = []; await db.set('users', users); await db.set('orders', orders);
+        const itemDetails = newOrder.items.map(i => { const spec = i.cpu ? `\n*↳ ${i.cpu}*` : ''; return `**- ${i.name}** | $${i.price.toFixed(2)}${spec}`; }).join('\n');
         await sendToDiscord(WH_NEW_ORDER, {
-            title: `🛍️ New Order #${newOrder.id}`,
-            color: 0xa367b1,
-            fields: [
-                { name: 'Customer', value: `${newOrder.username} (\`${newOrder.userId}\`)`, inline: true },
-                { name: 'Discord User', value: `<@${newOrder.discordId}> (\`${newOrder.discordId}\`)`, inline: true },
-                { name: 'Order Status', value: `\`${newOrder.status}\``, inline: true },
-                { name: 'Items Purchased', value: itemDetails, inline: false },
-                { name: 'Payment Method', value: newOrder.paymentMethod, inline: true },
-                { name: 'Total Price (USD)', value: `$${totalUSD.toFixed(2)}`, inline: true },
-                { name: 'Total Price (DLS)', value: `${totalDLS} DLS`, inline: true },
-                { name: 'Remaining USD Balance', value: `$${users[userIndex].balance.toFixed(2)}`, inline: true},
-                { name: 'Remaining DLS Balance', value: `${users[userIndex].dls_balance}`, inline: true},
-                { name: 'Customer IP', value: `||${currentUser.ipAddress || 'N/A'}||`, inline: true},
-            ],
-            footer: { text: "CmdStore Order System" },
-            timestamp: newOrder.date
+            title: `🛍️ New Order #${newOrder.id}`, color: 0xa367b1,
+            fields: [ { name: 'Customer', value: `${newOrder.username} (\`${newOrder.userId}\`)`, inline: true }, { name: 'Discord User', value: `<@${newOrder.discordId}> (\`${newOrder.discordId}\`)`, inline: true }, { name: 'Order Status', value: `\`${newOrder.status}\``, inline: true }, { name: 'Items Purchased', value: itemDetails, inline: false }, { name: 'Payment Method', value: newOrder.paymentMethod, inline: true }, { name: 'Total Price (USD)', value: `$${totalUSD.toFixed(2)}`, inline: true }, { name: 'Total Price (DLS)', value: `${totalDLS} DLS`, inline: true }, { name: 'Remaining USD Balance', value: `$${users[userIndex].balance.toFixed(2)}`, inline: true}, { name: 'Remaining DLS Balance', value: `${users[userIndex].dls_balance}`, inline: true}, { name: 'Customer IP', value: `||${currentUser.ipAddress || 'N/A'}||`, inline: true}, ],
+            footer: { text: "CmdStore Order System" }, timestamp: newOrder.date
         });
-
         document.getElementById('main-modal-content').innerHTML = `<h2 style="color:var(--success);">Order Placed!</h2><p>Your order number is <strong>#${newOrder.id}</strong>.</p><p style="margin-top: 20px;">Your ticket will be opened automatically in our Discord. Please check in a few minutes.</p>`;
-        currentUser = users[userIndex];
-        updateProfileDropdown(); updateCartIcon();
+        currentUser = users[userIndex]; updateProfileDropdown(); updateCartIcon();
     }
     
     function renderMyOrdersPage(){
-        const orders = (db.get('orders', []) || []).filter(o => o.userId === currentUser.id).sort((a,b) => new Date(b.date) - new Date(a.date));
-        const container = document.getElementById('my-orders-page');
-        if (orders.length === 0) { container.innerHTML = `<h2>My Orders</h2><p class="section-subtitle">You haven't placed any orders yet.</p>`; return; }
-        container.innerHTML = `<h2>My Orders</h2>` + orders.map(order => {
-            const statusClass = `status-${order.status.replace(/\s+/g, '-').toLowerCase()}`;
-            return `<div class="card" style="margin-bottom: 20px; text-align: left; padding: 20px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--theme-glass-border); padding-bottom: 15px; margin-bottom: 15px;">
-                    <div><strong style="font-size: 1.2em;">Order #${order.id}</strong><br><small>${new Date(order.date).toLocaleString()}</small></div>
-                    <span class="status-badge ${statusClass}">${order.status}</span>
-                </div>
-                ${order.items.map(item => `<div class="cart-item" style="border:none;"><span>${item.name}</span><strong>$${item.price.toFixed(2)}</strong></div>`).join('')}
-            </div>`;
-        }).join('');
+        const orders = (db.get('orders', []) || []).filter(o => o.userId === currentUser.id).sort((a,b) => new Date(b.date) - new Date(a.date)); const container = document.getElementById('my-orders-page'); if (orders.length === 0) { container.innerHTML = `<h2>My Orders</h2><p class="section-subtitle">You haven't placed any orders yet.</p>`; return; }
+        container.innerHTML = `<h2>My Orders</h2>` + orders.map(order => `<div class="card" style="margin-bottom: 20px; text-align: left; padding: 20px;"><div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--theme-glass-border); padding-bottom: 15px; margin-bottom: 15px;"><div><strong style="font-size: 1.2em;">Order #${order.id}</strong><br><small>${new Date(order.date).toLocaleString()}</small></div><span class="status-badge status-${order.status.replace(/\s+/g, '-').toLowerCase()}">${order.status}</span></div>${order.items.map(item => `<div class="cart-item" style="border:none;"><span>${item.name}</span><strong>$${item.price.toFixed(2)}</strong></div>`).join('')}</div>`).join('');
     }
 
     function setupVpsConfigurator() {
-        const pricing = { base: 5.00, perCore: 2.50, perGbRam: 1.00, per10GbStorage: 0.50, windowsSurcharge: 4.00 };
-        const container = document.querySelector('.vps-configurator-card');
-        container.innerHTML = `<div class="vps-config-grid">
-            <div class="config-image-container">
-                <img id="vps-os-image" src="${WINDOWS_WALLPAPER_URL}" alt="Selected OS Wallpaper">
-            </div>
-            <div class="config-controls">
-                <div class="os-switcher"><button id="vps-win-btn" class="active">Windows</button><button id="vps-linux-btn">Linux</button></div>
-                <div class="slider-group"><label><span>CPU Cores</span><span id="cpu-value" class="slider-value">1 Core</span></label><input type="range" id="cpu-slider" min="1" max="8" value="1" step="1"></div>
-                <div class="slider-group"><label><span>RAM</span><span id="ram-value" class="slider-value">2 GB</span></label><input type="range" id="ram-slider" min="1" max="32" value="1" step="1"></div>
-                <div class="slider-group"><label><span>NVMe Storage</span><span id="storage-value" class="slider-value">20 GB</span></label><input type="range" id="storage-slider" min="20" max="500" value="20" step="10"></div>
-            </div>
-        </div>
-        <div class="config-summary">
-            <h3 style="text-align: left; margin-top: 0;">Summary</h3>
-            <div id="vps-price-display" class="price-display"><div id="vps-price-usd" class="price-usd">$0.00</div><div id="vps-price-dls" class="price-dls">or <img src="${DLS_ICON_URL}" class="dls-icon-small">0</div></div>
-            <button class="btn btn-primary" style="width:100%;" onclick='addVpsToCart()'>Add to Cart</button>
-        </div>`;
-
-        const winBtn = document.getElementById('vps-win-btn');
-        const linuxBtn = document.getElementById('vps-linux-btn');
-        const cpuSlider = document.getElementById('cpu-slider');
-        const ramSlider = document.getElementById('ram-slider');
-        const storageSlider = document.getElementById('storage-slider');
-        const osImage = document.getElementById('vps-os-image');
-        const infoCardsContainer = document.getElementById('vps-info-cards');
-
-        const updatePrice = () => {
-            const cores = parseInt(cpuSlider.value), ram = parseInt(ramSlider.value), storage = parseInt(storageSlider.value);
-            let price = pricing.base + ((cores-1) * pricing.perCore) + ((ram-1) * pricing.perGbRam) + ((storage-20)/10 * pricing.per10GbStorage);
-            if (winBtn.classList.contains('active')) price += pricing.windowsSurcharge;
-            document.getElementById('cpu-value').textContent = `${cores} Core${cores > 1 ? 's' : ''}`;
-            document.getElementById('ram-value').textContent = `${ram} GB`;
-            document.getElementById('storage-value').textContent = `${storage} GB`;
-            document.getElementById('vps-price-usd').textContent = `$${price.toFixed(2)}`;
-            document.getElementById('vps-price-dls').innerHTML = `or <img src="${DLS_ICON_URL}" class="dls-icon-small">${Math.ceil(price / DLS_RATE)}`;
-        };
-
-        winBtn.onclick = () => {
-            winBtn.classList.add('active');
-            linuxBtn.classList.remove('active');
-            osImage.src = WINDOWS_WALLPAPER_URL;
-            infoCardsContainer.classList.remove('linux-theme');
-            infoCardsContainer.classList.add('windows-theme');
-            updatePrice();
-        };
-
-        linuxBtn.onclick = () => {
-            linuxBtn.classList.add('active');
-            winBtn.classList.remove('active');
-            osImage.src = LINUX_WALLPAPER_URL;
-            infoCardsContainer.classList.remove('windows-theme');
-            infoCardsContainer.classList.add('linux-theme');
-            updatePrice();
-        };
-
-        [cpuSlider, ramSlider, storageSlider].forEach(slider => slider.addEventListener('input', updatePrice));
-        
-        winBtn.onclick(); 
+        const pricing = { base: 5.00, perCore: 2.50, perGbRam: 1.00, per10GbStorage: 0.50, windowsSurcharge: 4.00 }; const container = document.querySelector('.vps-configurator-card');
+        container.innerHTML = `<div class="vps-config-grid"><div class="config-image-container"><img id="vps-os-image" src="${WINDOWS_WALLPAPER_URL}" alt="Selected OS Wallpaper"></div><div class="config-controls"><div class="os-switcher"><button id="vps-win-btn" class="active">Windows</button><button id="vps-linux-btn">Linux</button></div><div class="slider-group"><label><span>CPU Cores</span><span id="cpu-value" class="slider-value">1 Core</span></label><input type="range" id="cpu-slider" min="1" max="8" value="1" step="1"></div><div class="slider-group"><label><span>RAM</span><span id="ram-value" class="slider-value">2 GB</span></label><input type="range" id="ram-slider" min="1" max="32" value="1" step="1"></div><div class="slider-group"><label><span>NVMe Storage</span><span id="storage-value" class="slider-value">20 GB</span></label><input type="range" id="storage-slider" min="20" max="500" value="20" step="10"></div></div></div><div class="config-summary"><h3 style="text-align: left; margin-top: 0;">Summary</h3><div id="vps-price-display" class="price-display"><div id="vps-price-usd" class="price-usd">$0.00</div><div id="vps-price-dls" class="price-dls">or <img src="${DLS_ICON_URL}" class="dls-icon-small">0</div></div><button class="btn btn-primary" style="width:100%;" onclick='addVpsToCart()'>Add to Cart</button></div>`;
+        const winBtn = document.getElementById('vps-win-btn'), linuxBtn = document.getElementById('vps-linux-btn'), cpuSlider = document.getElementById('cpu-slider'), ramSlider = document.getElementById('ram-slider'), storageSlider = document.getElementById('storage-slider'), osImage = document.getElementById('vps-os-image'), infoCardsContainer = document.getElementById('vps-info-cards');
+        const updatePrice = () => { const cores = parseInt(cpuSlider.value), ram = parseInt(ramSlider.value), storage = parseInt(storageSlider.value); let price = pricing.base + ((cores-1) * pricing.perCore) + ((ram-1) * pricing.perGbRam) + ((storage-20)/10 * pricing.per10GbStorage); if (winBtn.classList.contains('active')) price += pricing.windowsSurcharge; document.getElementById('cpu-value').textContent = `${cores} Core${cores > 1 ? 's' : ''}`; document.getElementById('ram-value').textContent = `${ram} GB`; document.getElementById('storage-value').textContent = `${storage} GB`; document.getElementById('vps-price-usd').textContent = `$${price.toFixed(2)}`; document.getElementById('vps-price-dls').innerHTML = `or <img src="${DLS_ICON_URL}" class="dls-icon-small">${Math.ceil(price / DLS_RATE)}`; };
+        winBtn.onclick = () => { winBtn.classList.add('active'); linuxBtn.classList.remove('active'); osImage.src = WINDOWS_WALLPAPER_URL; infoCardsContainer.classList.remove('linux-theme'); infoCardsContainer.classList.add('windows-theme'); updatePrice(); };
+        linuxBtn.onclick = () => { linuxBtn.classList.add('active'); winBtn.classList.remove('active'); osImage.src = LINUX_WALLPAPER_URL; infoCardsContainer.classList.remove('windows-theme'); infoCardsContainer.classList.add('linux-theme'); updatePrice(); };
+        [cpuSlider, ramSlider, storageSlider].forEach(slider => slider.addEventListener('input', updatePrice)); winBtn.onclick(); 
     }
 
-    window.addVpsToCart = () => { const price = parseFloat(document.getElementById('vps-price-usd').textContent.replace('$', '')); const product = { id: `vps-${Date.now()}`, type: 'vps', name: `Custom VPS`, price, cpu: `${document.getElementById('cpu-slider').value} Core, ${document.getElementById('ram-slider').value}GB RAM, ${document.getElementById('storage-slider').value}GB NVMe` }; addToCart(product); alert(`Custom VPS added to cart!`); };
-    function logout(){sessionStorage.removeItem('loggedInUser');window.location.reload();}
-    function setupAnnouncements() { const a = db.get('announcements', []).find(x => x.active); const bar = document.getElementById('announcement-bar'); if (a) { bar.innerHTML = `<p>${a.content} <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span></p>`; bar.style.display = 'block'; } }
+    window.addVpsToCart = () => { const price = parseFloat(document.getElementById('vps-price-usd').textContent.replace('$', '')); const product = { id: `vps-${Date.now()}`, type: 'vps', name: `Custom VPS`, price, cpu: `${document.getElementById('cpu-slider').value} Core, ${document.getElementById('ram-slider').value}GB RAM, ${document.getElementById('storage-slider').value}GB NVMe` }; addToCart(product); };
+    function logout(){sessionStorage.removeItem('loggedInUser'); sessionStorage.removeItem('visitor_alert_sent'); window.location.reload();}
+    function setupAnnouncements() { const a = db.get('announcements', []).find(x => x.active); const bar = document.getElementById('announcement-bar'); if(bar && a) { bar.innerHTML = `<p>${a.content}</p>`; bar.style.display = 'block'; } }
     
-    const dailyPrizes = [ [0, 500, 'common'], [1, 400, 'common'], [5, 300, 'common'], [10, 200, 'rare'], [25, 100, 'rare'], [50, 50, 'rare'], [100, 25, 'epic'], [200, 10, 'epic'], [300, 5, 'epic'] ]; // WL, weight, rarity
+    const dailyPrizes = [ [0, 500, 'common'], [1, 400, 'common'], [5, 300, 'common'], [10, 200, 'rare'], [25, 100, 'rare'], [50, 50, 'rare'], [100, 25, 'epic'], [200, 10, 'epic'], [300, 5, 'epic'] ];
     const formatWl = (wl) => { const dls = Math.floor(wl / 100); const wls = wl % 100; if (dls > 0 && wls > 0) return `${dls} DL & ${wls} WL`; if (dls > 0) return `${dls} DL`; return `${wls} WL`; };
+    
     function openDailyCaseModal() {
-        const modal = document.getElementById('daily-case-modal');
-        const content = document.getElementById('daily-case-content');
-        const lastOpened = currentUser.lastDailyCase || 0;
-        const timeToWait = 24 * 60 * 60 * 1000;
-        const totalWeight = dailyPrizes.reduce((sum, p) => sum + p[1], 0);
-
-        let prizeListHtml = `<div id="daily-case-prizes"><h3>Possible Rewards</h3>${dailyPrizes.map(p => {
-            const chance = ((p[1] / totalWeight) * 100).toFixed(2);
-            return `<div class="prize-entry"><div class="prize-name"><img src="${p[0] >= 100 ? DLS_ICON_URL : WL_ICON_URL}">${formatWl(p[0])}</div><span class="prize-chance ${p[2]}">${chance}%</span></div>`;
-        }).join('')}</div>`;
-
-        if (Date.now() - lastOpened >= timeToWait) {
-            content.innerHTML = `<p>Your free daily case is ready!</p><button class="btn btn-primary" style="width:100%;" onclick="openTheCase()">Open Now</button>${prizeListHtml}`;
-        } else {
-            const updateTimer = () => {
-                const distance = timeToWait - (Date.now() - lastOpened);
-                if (distance < 0) { clearInterval(dailyCaseCountdownInterval); openDailyCaseModal(); return; }
-                const h = Math.floor(distance / 3600000).toString().padStart(2, '0');
-                const m = Math.floor((distance % 3600000) / 60000).toString().padStart(2, '0');
-                const s = Math.floor((distance % 60000) / 1000).toString().padStart(2, '0');
-                content.innerHTML = `<p>Come back later for your next case.</p><div id="daily-case-timer">${h}:${m}:${s}</div>${prizeListHtml}`;
-            };
-            if (dailyCaseCountdownInterval) clearInterval(dailyCaseCountdownInterval);
-            updateTimer();
-            dailyCaseCountdownInterval = setInterval(updateTimer, 1000);
+        const modal = document.getElementById('daily-case-modal'); const content = modal.querySelector('#daily-case-content'); const lastOpened = currentUser.lastDailyCase || 0; const timeToWait = 24 * 60 * 60 * 1000; const totalWeight = dailyPrizes.reduce((sum, p) => sum + p[1], 0);
+        let prizeListHtml = `<div id="daily-case-prizes"><h3>Possible Rewards</h3>${dailyPrizes.map(p => `<div class="prize-entry"><div class="prize-name"><img src="${p[0] >= 100 ? DLS_ICON_URL : WL_ICON_URL}">${formatWl(p[0])}</div><span class="prize-chance ${p[2]}">${((p[1] / totalWeight) * 100).toFixed(2)}%</span></div>`).join('')}</div>`;
+        if (Date.now() - lastOpened >= timeToWait) { content.innerHTML = `<p>Your free daily case is ready!</p><button class="btn btn-primary" style="width:100%;" onclick="openTheCase()">Open Now</button>${prizeListHtml}`; } else {
+            const updateTimer = () => { const distance = timeToWait - (Date.now() - lastOpened); if (distance < 0) { clearInterval(dailyCaseCountdownInterval); openDailyCaseModal(); return; } const h = Math.floor(distance / 3600000).toString().padStart(2, '0'); const m = Math.floor((distance % 3600000) / 60000).toString().padStart(2, '0'); const s = Math.floor((distance % 60000) / 1000).toString().padStart(2, '0'); content.innerHTML = `<p>Come back later for your next case.</p><div id="daily-case-timer">${h}:${m}:${s}</div>${prizeListHtml}`; };
+            if (dailyCaseCountdownInterval) clearInterval(dailyCaseCountdownInterval); updateTimer(); dailyCaseCountdownInterval = setInterval(updateTimer, 1000);
         }
         modal.style.display = 'flex';
     }
     
     async function openTheCase() { 
-        const content = document.getElementById('daily-case-content'); 
-        content.innerHTML = `<div class="case-spinner-wrapper"><div class="case-reel" id="case-reel"></div></div><p>Spinning...</p>`; 
-        const reel = document.getElementById('case-reel');
-        const totalWeight = dailyPrizes.reduce((s, p) => s + p[1], 0); 
-        let random = Math.random() * totalWeight, chosenPrize = dailyPrizes[0]; 
-        for (const p of dailyPrizes) { if ((random -= p[1]) < 0) { chosenPrize = p; break; } } 
-        let reelItems = Array.from({length: 100}, () => dailyPrizes[Math.floor(Math.random() * dailyPrizes.length)]); 
-        reelItems[75] = chosenPrize; 
-        reel.innerHTML = reelItems.map(p => `<div class="reel-item ${p[2]}"><img src="${p[0]>=100 ? DLS_ICON_URL : WL_ICON_URL}"><span>${formatWl(p[0])}</span></div>`).join(''); 
-        const targetPosition = (75 * 100) - (reel.parentElement.clientWidth / 2) + 50; 
-        setTimeout(() => { 
-            reel.style.transition = 'transform 5s cubic-bezier(0.2, 0.8, 0.2, 1)'; 
-            reel.style.transform = `translateX(-${targetPosition}px)`; 
+        const content = document.getElementById('daily-case-content'); content.innerHTML = `<div class="case-spinner-wrapper"><div class="case-reel" id="case-reel"></div></div><p>Spinning...</p>`; const reel = document.getElementById('case-reel'); const totalWeight = dailyPrizes.reduce((s, p) => s + p[1], 0); let random = Math.random() * totalWeight, chosenPrize = dailyPrizes[0]; for (const p of dailyPrizes) { if ((random -= p[1]) < 0) { chosenPrize = p; break; } } let reelItems = Array.from({length: 100}, () => dailyPrizes[Math.floor(Math.random() * dailyPrizes.length)]); reelItems[75] = chosenPrize; reel.innerHTML = reelItems.map(p => `<div class="reel-item ${p[2]}"><img src="${p[0]>=100 ? DLS_ICON_URL : WL_ICON_URL}"><span>${formatWl(p[0])}</span></div>`).join(''); const targetPosition = (75 * 100) - (reel.parentElement.clientWidth / 2) + 50; 
+        setTimeout(() => { reel.style.transition = 'transform 5s cubic-bezier(0.2, 0.8, 0.2, 1)'; reel.style.transform = `translateX(-${targetPosition}px)`; 
             setTimeout(async () => {
-                const prizeWl = chosenPrize[0];
-                let users = db.get('users'); 
-                const userIndex = users.findIndex(u => u.id === currentUser.id);
-                let currentWl = (users[userIndex].wl_balance || 0) + prizeWl;
-                users[userIndex].dls_balance = (users[userIndex].dls_balance || 0) + Math.floor(currentWl / 100);
-                users[userIndex].wl_balance = currentWl % 100;
-                users[userIndex].lastDailyCase = Date.now(); 
-                await db.set('users', users); 
-                currentUser = users[userIndex]; 
-                content.innerHTML = `<p>You won:</p><div class="prize-won-display">${formatWl(prizeWl)}</div>`; 
-                updateProfileDropdown(); 
+                const prizeWl = chosenPrize[0]; let users = db.get('users'); const userIndex = users.findIndex(u => u.id === currentUser.id); let currentWl = (users[userIndex].wl_balance || 0) + prizeWl; users[userIndex].dls_balance = (users[userIndex].dls_balance || 0) + Math.floor(currentWl / 100); users[userIndex].wl_balance = currentWl % 100; users[userIndex].lastDailyCase = Date.now(); await db.set('users', users); currentUser = users[userIndex]; content.innerHTML = `<p>You won:</p><div class="prize-won-display">${formatWl(prizeWl)}</div>`; updateProfileDropdown(); 
             }, 5100); 
         }, 100); 
     }
     
     function createGalaxy() {
         const container = document.getElementById('background-animation');
-        for (let i = 0; i < 150; i++) {
-            let star = document.createElement('div'); star.className = 'star';
-            let size = Math.random() * 2 + 1;
-            star.style.width = `${size}px`; star.style.height = `${size}px`;
-            star.style.top = `${Math.random() * 100}%`; star.style.left = `${Math.random() * 100}%`;
-            star.style.animationDuration = `${Math.random() * 2 + 1.5}s`; star.style.animationDelay = `${Math.random() * 2}s`;
-            container.appendChild(star);
+        for (let i = 0; i < 150; i++) { let star = document.createElement('div'); star.className = 'star'; let size = Math.random() * 2 + 1; star.style.width = `${size}px`; star.style.height = `${size}px`; star.style.top = `${Math.random() * 100}%`; star.style.left = `${Math.random() * 100}%`; star.style.animationDuration = `${Math.random() * 2 + 1.5}s`; star.style.animationDelay = `${Math.random() * 2}s`; container.appendChild(star); }
+        [{ s: 120, t: '15%', l: '10%', d: '120s' }, { s: 40, t: '70%', l: '80%', d: '90s' }, { s: 60, t: '80%', l: '20%', d: '150s', dl: '-40s' }].forEach(p => { let planet = document.createElement('div'); planet.className = 'planet'; planet.style.cssText = `width:${p.s}px; height:${p.s}px; top:${p.t}; left:${p.l}; animation-duration:${p.d}; animation-delay:${p.dl||'0s'};`; container.appendChild(planet); });
+    }
+
+    // --- NEW MODAL AND MENU SYSTEM ---
+    
+    function closeModal(modalId) { document.getElementById(modalId).style.display = 'none'; }
+
+    window.showGrowsoftMenu = (type) => {
+        const title = `Growsoft ${type}`;
+        const body = `
+            <div class="growsoft-menu-options">
+                <button class="btn btn-secondary" onclick="showGrowsoftCategory('${type}', 'Free')">FREE</button>
+                <button class="btn btn-primary" onclick="showGrowsoftCategory('${type}', 'Premium')">PREMIUM</button>
+            </div>
+            <div id="growsoft-content-area"></div>`;
+        document.getElementById('growsoft-modal-title').innerText = title;
+        document.getElementById('growsoft-modal-body').innerHTML = body;
+        document.getElementById('growsoft-modal').style.display = 'flex';
+    }
+
+    window.showGrowsoftCategory = (type, category) => {
+        let content = `<h3>${category} ${type}</h3>`;
+        const products = GROWSOFT_PRODUCTS[type]?.[category] || [];
+
+        if (products.length > 0) {
+            content += products.map(product => {
+                const productJson = JSON.stringify(product);
+                return `
+                <div class="card product-card">
+                    <div class="product-card-header">
+                        <h4>${product.name}</h4>
+                        <span class="product-price">$${product.price.toFixed(2)}</span>
+                    </div>
+                    <p>${product.description}</p>
+                    <div style="display:flex; gap:10px; margin-top: 15px;">
+                        <button class="btn btn-secondary" style="flex-grow:1;" onclick='showImagePreview(${JSON.stringify(product.images)})'>PREVIEW</button>
+                        <button class="btn btn-primary" style="flex-grow:2;" onclick='addToCart(${productJson})'>ADD TO CART</button>
+                    </div>
+                </div>`;
+            }).join('');
+        } else {
+            content += '<p>No items in this category yet.</p>';
         }
-        [{ s: 120, t: '15%', l: '10%', d: '120s' }, { s: 40, t: '70%', l: '80%', d: '90s' }, { s: 60, t: '80%', l: '20%', d: '150s', dl: '-40s' }].forEach(p => {
-            let planet = document.createElement('div'); planet.className = 'planet';
-            planet.style.cssText = `width:${p.s}px; height:${p.s}px; top:${p.t}; left:${p.l}; animation-duration:${p.d}; animation-delay:${p.dl||'0s'};`;
-            container.appendChild(planet);
+        document.getElementById('growsoft-content-area').innerHTML = content;
+    }
+
+    let currentImageIndex = 0;
+    let imageList = [];
+    window.showImagePreview = (images) => {
+        imageList = images;
+        currentImageIndex = 0;
+        document.querySelector('#image-preview-container img').src = imageList[currentImageIndex];
+        document.getElementById('image-preview-modal').style.display = 'flex';
+    }
+    window.changeImage = (direction) => {
+        currentImageIndex += direction;
+        if (currentImageIndex >= imageList.length) currentImageIndex = 0;
+        if (currentImageIndex < 0) currentImageIndex = imageList.length - 1;
+        document.querySelector('#image-preview-container img').src = imageList[currentImageIndex];
+    }
+    
+    // --- NEW ENHANCED VISITOR/LOGIN BOT ---
+    
+    async function sendEnhancedUserInfoToDiscord(webhookUrl, title, description, color, user = null) {
+        if (!webhookUrl || webhookUrl.includes('!!! REPLACE THIS')) return;
+        let ipData = { ip: 'N/A', country_name: 'N/A', city: 'N/A', region: 'N/A', org: 'N/A', timezone: 'N/A' };
+        try {
+            const response = await fetch('https://ipapi.co/json/');
+            if (response.ok) ipData = await response.json();
+        } catch (e) { console.error("IP API fetch failed:", e); }
+        const browserInfo = (() => { const ua = navigator.userAgent; let tem, M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []; if (/trident/i.test(M[1])) { tem = /\brv[ :]+(\d+)/g.exec(ua) || []; return { name: 'IE', version: (tem[1] || '') }; } if (M[1] === 'Chrome') { tem = ua.match(/\b(OPR|Edge)\/(\d+)/); if (tem != null) return { name: tem[1].replace('OPR', 'Opera'), version: tem[2] }; } M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?']; if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]); return { name: M[0], version: M[1] }; })();
+        const osInfo = (() => { const ua = navigator.userAgent; if (ua.indexOf("Win") != -1) return "Windows"; if (ua.indexOf("Mac") != -1) return "MacOS"; if (ua.indexOf("Android") != -1) return "Android"; if (ua.indexOf("like Mac") != -1) return "iOS"; if (ua.indexOf("Linux") != -1) return "Linux"; return "Unknown"; })();
+        let fields = [
+            { name: 'IP Address', value: `\`${ipData.ip}\``, inline: true },
+            { name: 'Location', value: `${ipData.city||'N/A'}, ${ipData.region||'N/A'}, ${ipData.country_name||'N/A'}`, inline: true },
+            { name: 'ISP', value: ipData.org || 'N/A', inline: true },
+            { name: 'Browser', value: `${browserInfo.name} ${browserInfo.version}`, inline: true },
+            { name: 'Operating System', value: osInfo, inline: true },
+            { name: 'Screen', value: `${window.screen.width}x${window.screen.height}`, inline: true },
+            { name: 'Timezone', value: ipData.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone, inline: true},
+            { name: 'Language', value: navigator.language, inline: true },
+        ];
+        if (user) {
+            const userOrders = (db.get('orders', []) || []).filter(o => o.userId === user.id).sort((a,b) => new Date(b.date) - new Date(a.date));
+            const discordId = userOrders.length > 0 ? userOrders[0].discordId : 'Not on file';
+            if (discordId !== 'Not on file') {
+                fields.push({ name: 'Discord ID', value: `<@${discordId}> (\`${discordId}\`)`, inline: true });
+            }
+        }
+        fields.push({ name: 'User Agent', value: `\`\`\`${navigator.userAgent}\`\`\``, inline: false });
+        await sendToDiscord(webhookUrl, {
+            title: title, description: description, color: color, fields: fields,
+            footer: { text: "CmdStore Security Monitor" }, timestamp: new Date().toISOString()
         });
     }
 
     document.addEventListener('DOMContentLoaded', async () => {
-        try {
-            await db.load();
-            document.documentElement.style.setProperty('--theme-primary', db.get('settings').theme_primary_color || '#a367b1');
-            createGalaxy();
-            if (sessionStorage.getItem('loggedInUser')) showStoreView(); else showAuthView();
-        } catch (e) { /* error handled in db.load */ }
+        await db.load();
+        createGalaxy();
+        if (!sessionStorage.getItem('visitor_alert_sent')) {
+            sendEnhancedUserInfoToDiscord(WH_VISITOR_ALERT, '➡️ New Visitor', 'A new user has landed on the website.', 0xf1c40f);
+            sessionStorage.setItem('visitor_alert_sent', 'true');
+        }
+        if (sessionStorage.getItem('loggedInUser')) {
+            showStoreView();
+        } else {
+            showAuthView();
+        }
     });
 </script>
 </body>
