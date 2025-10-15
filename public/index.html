@@ -302,24 +302,27 @@
     let dailyCaseCountdownInterval = null;
 
     // This object now fetches from and posts to your server
+// This object now fetches from and posts to your Vercel Serverless Functions
     const db = {
         load: async () => {
             try {
-                const response = await fetch('/get-database');
+                // Fetch from the new serverless function URL
+                const response = await fetch('/api/get-database');
                 if (!response.ok) throw new Error('Failed to fetch database from server.');
                 AppDB = await response.json();
             } catch (e) {
                 console.error("DB Load Failed:", e);
-                document.body.innerHTML = `<h2>Critical Error: Could not load database from server.</h2><p>Make sure the server.js is running.</p>`;
+                document.body.innerHTML = `<h2>Critical Error: Could not load database from server.</h2>`;
                 throw e;
             }
         },
         save: async () => {
             try {
-                await fetch('/save-database', {
+                // Save to the new serverless function URL
+                await fetch('/api/save-database', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(AppDB, null, 2) // Pretty-print the JSON
+                    body: JSON.stringify(AppDB)
                 });
             } catch (e) {
                 console.error("DB Save Failed:", e);
@@ -329,7 +332,7 @@
         get: (k, d = null) => AppDB[k] ?? d,
         set: async (k, v) => {
             AppDB[k] = v;
-            await db.save(); // This will now send the updated database to the server
+            await db.save(); // This will now send the updated database to the serverless function
         },
     };
     
