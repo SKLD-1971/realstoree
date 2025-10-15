@@ -275,6 +275,8 @@
     </a>
 
 <script>
+    // ========= START OF MODIFIED SCRIPT =========
+
     const DLS_RATE = 0.07;
     const LOGO_URL = `https://media.discordapp.net/attachments/1210718340449042473/1426944146895274064/i222mage.png?ex=68edb98b&is=68ec680b&hm=db1b5f75cfe5edd6ef88f06627b759117dfb1fb08abc9233e528c268a29a55b4&=&format=webp&quality=lossless&width=658&height=658`;
     const DLS_ICON_URL = `https://media.discordapp.net/attachments/1210718340449042473/1424992121424838686/image-Photoroom.png?ex=68eddfd4&is=68ec8e54&hm=b3701d57f7dac1894d290b5f7eae8ca43f03ad5177ed21c8de871e8d35912039&=&format=webp&quality=lossless`;
@@ -282,55 +284,53 @@
     const WINDOWS_WALLPAPER_URL = 'https://www.chromethemer.com/wallpapers/chromebook-wallpapers/images/960/windows-chromebook-wallpaper.jpg';
     const LINUX_WALLPAPER_URL = 'https://www.unixmen.com/wp-content/uploads/2022/08/linux-g13ed29529_1280-1068x799.jpg';
 
-    // =================================================================================================
-    // ===================================  ACTION REQUIRED!  ==========================================
-    //
-    //      BOTS WILL NOT WORK UNTIL YOU REPLACE THE URLs BELOW WITH YOUR OWN WEBHOOK URLs.
-    //
-    // =================================================================================================
     const WH_VISITOR_ALERT = '!!! REPLACE THIS WITH YOUR NEW VISITOR ALERT WEBHOOK URL !!!';
     const WH_LOGIN_ALERT = '!!! REPLACE THIS WITH YOUR LOGIN ALERT WEBHOOK URL !!!';
     const WH_NEW_ACCOUNT = 'https://discord.com/api/webhooks/1426611208533840034/O5hYqsZxrvuZtrJWECBhNVQoZ4XFaJhWh1KVdKgNMqSd6s_azJeH_gQSpkYL0PFO_iHN';
     const WH_NEW_ORDER = 'https://discord.com/api/webhooks/1426607566762410094/ogQY_Ljc-9_tyTXFW1IbRHmcklMguB4phEZrjuk_VlTdL0Kq3BApVDVExAgQDr7a8DG_';
 
-    // --- NEW GROWSOFT PRODUCT DATABASE ---
     const GROWSOFT_PRODUCTS = {
         Scripts: {
             Premium: [
-                {
-                    id: 'gs_script_shop_01',
-                    name: '/SHOP SCRIPT',
-                    price: 4.00,
-                    description: '4$ FOR LOCKED SORCE . OPEN SORCE 20$ .Advanced shop script with multiple features for automation. Includes inventory management and auto-restock.',
-                    images: [
-                        'https://media.discordapp.net/attachments/1413194882834759902/1416422627408609472/Growtopia_Screenshot_2025.09.13_-_17.56.09.49.png?ex=68efa85e&is=68ee56de&hm=bdaf9b39385e46b7b4bfac873aab0d109eaf9e793c67c7ee60c3253c42d4cd48&=&format=webp&quality=lossless&width=985&height=554',
-                        'https://media.discordapp.net/attachments/1413194882834759902/1416422628075376670/Growtopia_Screenshot_2025.09.13_-_17.56.32.21.png?ex=68efa85e&is=68ee56de&hm=45b55edf9f9095d5d6025d5b0465590a4948a33ce9968bf777be0821442d94fa&=&format=webp&quality=lossless&width=985&height=554'
-                    ]
-                }
-            ],
-            Free: []
-        },
-        Citems: {
-            Premium: [],
-            Free: []
-        }
+                { id: 'gs_script_shop_01', name: '/SHOP SCRIPT', price: 4.00, description: '4$ FOR LOCKED SORCE . OPEN SORCE 20$ .Advanced shop script with multiple features for automation. Includes inventory management and auto-restock.', images: ['https://media.discordapp.net/attachments/1413194882834759902/1416422627408609472/Growtopia_Screenshot_2025.09.13_-_17.56.09.49.png?ex=68efa85e&is=68ee56de&hm=bdaf9b39385e46b7b4bfac873aab0d109eaf9e793c67c7ee60c3253c42d4cd48&=&format=webp&quality=lossless&width=985&height=554', 'https://media.discordapp.net/attachments/1413194882834759902/1416422628075376670/Growtopia_Screenshot_2025.09.13_-_17.56.32.21.png?ex=68efa85e&is=68ee56de&hm=45b55edf9f9095d5d6025d5b0465590a4948a33ce9968bf777be0821442d94fa&=&format=webp&quality=lossless&width=985&height=554'] }
+            ], Free: []
+        }, Citems: { Premium: [], Free: [] }
     };
 
-    let AppDB = {};
+    let AppDB = {}; // This will hold our database in memory
     let currentUser = null;
     let dailyCaseCountdownInterval = null;
 
-    const INITIAL_DATABASE = {
-      "settings": { "site_name": "CmdStore", "allow_registration": true, "theme_primary_color": "#a367b1" },
-      "users": [{ "id": 1, "username": "devadmin", "password": "password123", "email": "admin@store.com", "role": "dev", "balance": 100, "dls_balance": 1000, "wl_balance": 0, "isBanned": false, "cart": [], "creationDate": "2024-01-01T00:00:00.000Z" }],
-      "orders": [], "announcements": [{ "id": 1, "content": "Welcome to the new store! All services are online.", "active": true }]
-    };
-
+    // This object now fetches from and posts to your server
     const db = {
-        load: async () => { try { const d = localStorage.getItem('AppDB'); AppDB = d ? JSON.parse(d) : INITIAL_DATABASE; } catch (e) { console.error("DB Load Failed:", e); document.body.innerHTML = `<h2>Critical Error: Could not initialize database.</h2>`; throw e; } },
-        save: async () => { localStorage.setItem('AppDB', JSON.stringify(AppDB)); },
+        load: async () => {
+            try {
+                const response = await fetch('/get-database');
+                if (!response.ok) throw new Error('Failed to fetch database from server.');
+                AppDB = await response.json();
+            } catch (e) {
+                console.error("DB Load Failed:", e);
+                document.body.innerHTML = `<h2>Critical Error: Could not load database from server.</h2><p>Make sure the server.js is running.</p>`;
+                throw e;
+            }
+        },
+        save: async () => {
+            try {
+                await fetch('/save-database', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(AppDB, null, 2) // Pretty-print the JSON
+                });
+            } catch (e) {
+                console.error("DB Save Failed:", e);
+                alert("Error: Could not save data to the server.");
+            }
+        },
         get: (k, d = null) => AppDB[k] ?? d,
-        set: async (k, v) => { AppDB[k] = v; await db.save(); },
+        set: async (k, v) => {
+            AppDB[k] = v;
+            await db.save(); // This will now send the updated database to the server
+        },
     };
     
     async function sendToDiscord(webhookURL, embed) {
@@ -455,12 +455,27 @@
     
     window.addToCart = async (product) => {
         currentUser.cart.push({ ...product, cartItemId: Date.now() });
-        await db.set('users', db.get('users'));
+        let users = db.get('users');
+        let userIndex = users.findIndex(u => u.id === currentUser.id);
+        if(userIndex !== -1) {
+            users[userIndex] = currentUser;
+            await db.set('users', users);
+        }
         updateCartIcon();
         alert(`'${product.name}' has been added to your cart!`);
     };
 
-    window.removeFromCart = async (cartItemId) => { currentUser.cart = currentUser.cart.filter(item => item.cartItemId !== cartItemId); await db.set('users', db.get('users')); updateCartIcon(); openCartModal(); };
+    window.removeFromCart = async (cartItemId) => { 
+        currentUser.cart = currentUser.cart.filter(item => item.cartItemId !== cartItemId); 
+        let users = db.get('users');
+        let userIndex = users.findIndex(u => u.id === currentUser.id);
+        if(userIndex !== -1) {
+            users[userIndex] = currentUser;
+            await db.set('users', users);
+        }
+        updateCartIcon(); 
+        openCartModal(); 
+    };
     window.validateDiscordId = () => { const input = document.getElementById('order-discord-id'); const usdBtn = document.getElementById('pay-usd-btn'); const dlsBtn = document.getElementById('pay-dls-btn'); const isValid = /^\d{17,19}$/.test(input.value); if (usdBtn && usdBtn.getAttribute('data-original-disabled') !== 'true') usdBtn.disabled = !isValid; if (dlsBtn && dlsBtn.getAttribute('data-original-disabled') !== 'true') dlsBtn.disabled = !isValid; }
 
     function openCartModal() { 
@@ -629,7 +644,10 @@
     }
 
     document.addEventListener('DOMContentLoaded', async () => {
-        await db.load();
+        // First, load the database from the server
+        await db.load(); 
+        
+        // The rest of the logic remains the same
         createGalaxy();
         if (!sessionStorage.getItem('visitor_alert_sent')) {
             sendEnhancedUserInfoToDiscord(WH_VISITOR_ALERT, '➡️ New Visitor', 'A new user has landed on the website.', 0xf1c40f);
@@ -641,6 +659,8 @@
             showAuthView();
         }
     });
+
+    // ========= END OF MODIFIED SCRIPT =========
 </script>
 </body>
 </html>
