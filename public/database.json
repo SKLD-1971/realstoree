@@ -1,1 +1,30 @@
-
+{
+  "settings": {
+    "site_name": "CmdStore",
+    "allow_registration": true,
+    "theme_primary_color": "#a367b1"
+  },
+  "users": [
+    {
+      "id": 1,
+      "username": "1",
+      "password": "02",
+      "email": "admin@store.com",
+      "role": "dev",
+      "balance": 100,
+      "dls_balance": 1000,
+      "wl_balance": 0,
+      "isBanned": false,
+      "cart": [],
+      "creationDate": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "orders": [],
+  "announcements": [
+    {
+      "id": 1,
+      "content": "Welcome to the new store! All services are online.",
+      "active": true
+    }
+  ]
+}
